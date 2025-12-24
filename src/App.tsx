@@ -6,9 +6,12 @@ import {
 	Download,
 	Globe,
 	Info,
+	Languages,
 	Linkedin,
+	Moon,
 	Network,
 	Share2,
+	Sun,
 	Target,
 	TrendingUp,
 	User,
@@ -17,26 +20,31 @@ import {
 } from "lucide-react";
 import type React from "react";
 import "./App.css";
+import { useLanguage } from "./contexts/LanguageContext";
+import { useTheme } from "./contexts/ThemeContext";
 
 const App = () => {
+	const { t, language, toggleLanguage } = useLanguage();
+	const { theme, toggleTheme } = useTheme();
+
 	const nodes = {
 		vias: {
 			core: "Conectividad Global",
-			resources: "Proveedores, Nube, APIs",
-			kpis: "Uptime, % Entrega",
-			risks: "Regulaciones",
+			resources: t.content.viasResources,
+			kpis: t.content.viasKpis,
+			risks: t.content.viasRisks,
 		},
 		valor: {
 			core: "Monetización",
-			resources: "Lógica, LCR, Facturación",
-			kpis: "Margen, ROI",
-			risks: "Costos variables",
+			resources: t.content.valorResources,
+			kpis: t.content.valorKpis,
+			risks: t.content.valorRisks,
 		},
 		ventaja: {
 			core: "Experiencia CX",
-			resources: "IA, Omnicanalidad, UX",
-			kpis: "CSAT, Retención",
-			risks: "Adopción",
+			resources: t.content.ventajaResources,
+			kpis: t.content.ventajaKpis,
+			risks: t.content.ventajaRisks,
 		},
 	};
 
@@ -140,6 +148,22 @@ const App = () => {
 						>
 							<Download size={14} /> Descargar PDF
 						</button>
+						{/* Language Toggle */}
+						<button
+							type="button"
+							onClick={toggleLanguage}
+							className="flex items-center gap-2 bg-slate-50 text-slate-700 px-4 py-2 rounded-full text-xs font-bold hover:bg-slate-100 transition-all shadow-sm active:scale-95"
+						>
+							<Languages size={14} /> {language === 'en' ? 'English' : 'Español'}
+						</button>
+						{/* Theme Toggle */}
+						<button
+							type="button"
+							onClick={toggleTheme}
+							className="flex items-center gap-2 bg-slate-50 text-slate-700 px-4 py-2 rounded-full text-xs font-bold hover:bg-slate-100 transition-all shadow-sm active:scale-95"
+						>
+							{theme === 'light' ? <Sun size={14} /> : <Moon size={14} />} {theme === 'light' ? 'Light Mode' : 'Dark Mode'}
+						</button>
 					</div>
 				</header>
 
@@ -186,21 +210,21 @@ const App = () => {
 						<div className="space-y-1">
 							<PyramidStep
 								color={{ border: "border-blue-500", text: "text-blue-500" }}
-								label="CAPA 03"
-								title="VENTAJA"
-								subtitle="Diferenciación & Innovación"
+								label={t.pyramid.layer03Label}
+								title={t.pyramid.layer03Title}
+								subtitle={t.pyramid.layer03Subtitle}
 							/>
 							<PyramidStep
 								color={{ border: "border-green-500", text: "text-green-500" }}
-								label="CAPA 02"
-								title="VALOR"
-								subtitle="Lógica & Rentabilidad"
+								label={t.pyramid.layer02Label}
+								title={t.pyramid.layer02Title}
+								subtitle={t.pyramid.layer02Subtitle}
 							/>
 							<PyramidStep
 								color={{ border: "border-red-500", text: "text-red-500" }}
-								label="CAPA 01"
-								title="VÍAS"
-								subtitle="Infraestructura & Canales"
+								label={t.pyramid.layer01Label}
+								title={t.pyramid.layer01Title}
+								subtitle={t.pyramid.layer01Subtitle}
 							/>
 						</div>
 						<div className="mt-8 flex justify-end items-center px-2">
@@ -222,19 +246,19 @@ const App = () => {
 							</div>
 							<div className="flex flex-wrap gap-4">
 								<CanvasBlock
-									title="Recursos Técnicos"
+									title={t.sections.viasResources}
 									value={nodes.vias.resources}
 									icon={Database}
 									color={{ text: "text-red-400" }}
 								/>
 								<CanvasBlock
-									title="KPIs Operativos"
+									title={t.sections.viasKpis}
 									value={nodes.vias.kpis}
 									icon={Target}
 									color={{ text: "text-red-400" }}
 								/>
 								<CanvasBlock
-									title="Barreras"
+									title={t.sections.viasRisks}
 									value={nodes.vias.risks}
 									icon={AlertCircle}
 									color={{ text: "text-red-400" }}
@@ -252,19 +276,19 @@ const App = () => {
 							</div>
 							<div className="flex flex-wrap gap-4">
 								<CanvasBlock
-									title="Modelos de Valor"
+									title={t.sections.valorResources}
 									value={nodes.valor.resources}
 									icon={Users}
 									color={{ text: "text-green-400" }}
 								/>
 								<CanvasBlock
-									title="Métricas Económicas"
+									title={t.sections.valorKpis}
 									value={nodes.valor.kpis}
 									icon={Target}
 									color={{ text: "text-green-400" }}
 								/>
 								<CanvasBlock
-									title="Mitigación"
+									title={t.sections.valorRisks}
 									value={nodes.valor.risks}
 									icon={CheckCircle2}
 									color={{ text: "text-green-400" }}
@@ -282,19 +306,19 @@ const App = () => {
 							</div>
 							<div className="flex flex-wrap gap-4">
 								<CanvasBlock
-									title="Integraciones Inteligentes"
+									title={t.sections.ventajaResources}
 									value={nodes.ventaja.resources}
 									icon={Zap}
 									color={{ text: "text-blue-400" }}
 								/>
 								<CanvasBlock
-									title="Impacto en Usuario"
+									title={t.sections.ventajaKpis}
 									value={nodes.ventaja.kpis}
 									icon={Target}
 									color={{ text: "text-blue-400" }}
 								/>
 								<CanvasBlock
-									title="Escalabilidad"
+									title={t.sections.ventajaRisks}
 									value={nodes.ventaja.risks}
 									icon={ArrowRight}
 									color={{ text: "text-blue-400" }}
