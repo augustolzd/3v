@@ -60,7 +60,7 @@ const App = () => {
 		subtitle: string;
 	}) => (
 		<div
-			className={`relative flex items-center justify-center w-full h-24 mb-1 border-b-4 ${color.border} bg-white group transition-all`}
+			className={`relative flex items-center justify-center w-full h-24 mb-1 border-b-4 ${color.border} bg-secondary group transition-all`}
 		>
 			<div className="text-center">
 				<span
@@ -68,10 +68,10 @@ const App = () => {
 				>
 					{label}
 				</span>
-				<h3 className="text-2xl font-black text-slate-800 leading-tight uppercase tracking-tighter">
+				<h3 className="text-2xl font-black text-primary leading-tight uppercase tracking-tighter">
 					{title}
 				</h3>
-				<p className="text-[10px] text-slate-400 font-medium italic">
+				<p className="text-[10px] text-tertiary font-medium italic">
 					{subtitle}
 				</p>
 			</div>
@@ -89,22 +89,22 @@ const App = () => {
 		value: string;
 		color: { text: string };
 	}) => (
-		<div className="flex-1 min-w-[200px] p-4 bg-white border border-slate-100 rounded-xl shadow-sm">
+		<div className="flex-1 min-w-[200px] p-4 bg-secondary border border-default rounded-xl shadow-sm">
 			<div className="flex items-center gap-2 mb-3">
 				<Icon size={14} className={color.text} />
-				<span className="text-[10px] font-bold text-slate-400 uppercase tracking-widest">
+				<span className="text-[10px] font-bold text-tertiary uppercase tracking-widest">
 					{title}
 				</span>
 			</div>
-			<div className="w-full text-sm font-medium text-slate-700 min-h-[60px] leading-relaxed">
+			<div className="w-full text-sm font-medium text-primary min-h-[60px] leading-relaxed">
 				{value}
 			</div>
 		</div>
 	);
 
 	return (
-		<div className="min-h-screen bg-[#F8FAFC] p-4 md:p-10 font-sans text-slate-900">
-			<div className="max-w-6xl mx-auto border border-slate-200 p-6 md:p-10 bg-white shadow-xl rounded-[2.5rem] relative overflow-hidden">
+		<div className="min-h-screen bg-primary p-4 md:p-10 font-sans text-primary">
+			<div className="max-w-6xl mx-auto border border-default p-6 md:p-10 bg-secondary shadow-xl rounded-[2.5rem] relative overflow-hidden">
 				{/* Header Section */}
 				<header className="relative z-10 flex flex-col md:flex-row justify-between items-start md:items-center mb-12 gap-6">
 					<div className="space-y-1">
@@ -114,10 +114,10 @@ const App = () => {
 								Public Strategy Framework
 							</span>
 						</div>
-						<h1 className="text-4xl font-black tracking-tighter text-slate-900 leading-none uppercase">
+						<h1 className="text-4xl font-black tracking-tighter text-primary leading-none uppercase">
 							Lienzo Estratégico <span className="text-blue-600">3V</span>
 						</h1>
-						<p className="text-slate-500 font-medium text-base">
+						<p className="text-secondary font-medium text-base">
 							Marco de alineación universal para infraestructuras digitales
 							escalables.
 						</p>
@@ -125,9 +125,9 @@ const App = () => {
 
 					<div className="flex flex-col items-end gap-2">
 						<div className="flex items-center gap-3">
-							<div className="flex items-center gap-2 bg-slate-50 px-4 py-2 rounded-full border border-slate-100 shadow-sm">
+							<div className="flex items-center gap-2 bg-tertiary px-4 py-2 rounded-full border border-default shadow-sm">
 								<User size={14} className="text-blue-600" />
-								<span className="text-xs font-bold text-slate-600 tracking-tight">
+								<span className="text-xs font-bold text-secondary tracking-tight">
 									Autoría de Augusto Lozada
 								</span>
 							</div>
@@ -135,7 +135,7 @@ const App = () => {
 								href="https://www.linkedin.com/in/augustolzd/"
 								target="_blank"
 								rel="noopener noreferrer"
-								className="p-2 bg-white border border-slate-200 rounded-full text-[#0077B5] hover:bg-[#0077B5] hover:text-white transition-all shadow-sm"
+								className="p-2 bg-secondary border border-default rounded-full text-[#0077B5] hover:bg-[#0077B5] hover:text-white transition-all shadow-sm"
 								title="LinkedIn Profile"
 							>
 								<Linkedin size={16} />
@@ -152,7 +152,7 @@ const App = () => {
 						<button
 							type="button"
 							onClick={toggleLanguage}
-							className="flex items-center gap-2 bg-slate-50 text-slate-700 px-4 py-2 rounded-full text-xs font-bold hover:bg-slate-100 transition-all shadow-sm active:scale-95"
+							className="flex items-center gap-2 bg-tertiary text-primary px-4 py-2 rounded-full text-xs font-bold hover:bg-tertiary transition-all shadow-sm active:scale-95"
 						>
 							<Languages size={14} /> {language === 'en' ? 'English' : 'Español'}
 						</button>
@@ -160,7 +160,7 @@ const App = () => {
 						<button
 							type="button"
 							onClick={toggleTheme}
-							className="flex items-center gap-2 bg-slate-50 text-slate-700 px-4 py-2 rounded-full text-xs font-bold hover:bg-slate-100 transition-all shadow-sm active:scale-95"
+							className="flex items-center gap-2 bg-tertiary text-primary px-4 py-2 rounded-full text-xs font-bold hover:bg-tertiary transition-all shadow-sm active:scale-95"
 						>
 							{theme === 'light' ? <Sun size={14} /> : <Moon size={14} />} {theme === 'light' ? 'Light Mode' : 'Dark Mode'}
 						</button>
@@ -329,7 +329,7 @@ const App = () => {
 				</div>
 
 				{/* Footer */}
-				<footer className="mt-16 pt-8 border-t border-slate-100 flex flex-col md:flex-row justify-between items-center text-slate-400">
+				<footer className="mt-16 pt-8 border-t border-default flex flex-col md:flex-row justify-between items-center text-tertiary">
 					<div className="flex items-center gap-3">
 						<div className="w-8 h-8 bg-slate-900 rounded flex items-center justify-center text-white font-black text-xs">
 							3V
