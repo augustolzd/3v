@@ -10,10 +10,22 @@ interface ThemeContextType {
 
 const ThemeContext = createContext<ThemeContextType | undefined>(undefined);
 
+// Detect system theme preference
+function detectSystemTheme(): Theme {
+  if (window.matchMedia?.('(prefers-color-scheme: dark)').matches) {
+    return 'dark';
+  }
+  return 'light';
+}
+
 export function ThemeProvider({ children }: { children: ReactNode }) {
   const [theme, setThemeState] = useState<Theme>(() => {
+    // Priority: localStorage > system preference > default (light)
     const saved = localStorage.getItem('theme');
-    return (saved === 'light' || saved === 'dark') ? saved : 'light';
+    if (saved === 'light' || saved === 'dark') {
+      return saved;
+    }
+    return detectSystemTheme();
   });
 
   const setTheme = (newTheme: Theme) => {
@@ -30,6 +42,22 @@ export function ThemeProvider({ children }: { children: ReactNode }) {
   useEffect(() => {
     document.documentElement.setAttribute('data-theme', theme);
   }, [theme]);
+
+  // Listen for system theme changes (optional - only if user hasn't set a preference)
+  useEffect(() => {
+    const saved = localStorage.getItem('theme');
+    if (saved) return; // User has a preference, don't override
+
+    const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
+    const handleChange = (e: MediaQueryListEvent) => {
+      const newTheme = e.matches ? 'dark' : 'light';
+      setThemeState(newTheme);
+      document.documentElement.setAttribute('data-theme', newTheme);
+    };
+
+    mediaQuery.addEventListener('change', handleChange);
+    return () => mediaQuery.removeEventListener('change', handleChange);
+  }, []);
 
   return (
     <ThemeContext.Provider value={{ theme, setTheme, toggleTheme }}>

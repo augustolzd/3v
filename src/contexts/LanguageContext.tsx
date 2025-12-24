@@ -10,10 +10,25 @@ interface LanguageContextType {
 
 const LanguageContext = createContext<LanguageContextType | undefined>(undefined);
 
+// Detect browser language
+function detectBrowserLanguage(): Language {
+  const browserLang = navigator.language.toLowerCase();
+  // Check if browser language starts with 'en' (en, en-US, en-GB, etc.)
+  if (browserLang.startsWith('en')) {
+    return 'en';
+  }
+  // Default to Spanish for all other languages
+  return 'es';
+}
+
 export function LanguageProvider({ children }: { children: ReactNode }) {
   const [language, setLanguageState] = useState<Language>(() => {
+    // Priority: localStorage > browser language > default (es)
     const saved = localStorage.getItem('language');
-    return (saved === 'es' || saved === 'en') ? saved : 'es';
+    if (saved === 'es' || saved === 'en') {
+      return saved;
+    }
+    return detectBrowserLanguage();
   });
 
   const setLanguage = (lang: Language) => {
