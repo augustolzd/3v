@@ -1,0 +1,17 @@
+{
+  "name": "3V Strategy Canvas",
+  "short_name": "3V Canvas",
+  "description": "Marco de alineación técnica y estratégica para el ecosistema Japifon",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#0f172a",
+  "icons": [
+    {
+      "src": "/favicon.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}
