@@ -2,6 +2,7 @@ import {
 	AlertCircle,
 	ArrowRight,
 	CheckCircle2,
+	ChevronDown,
 	Database,
 	Download,
 	Globe,
@@ -19,6 +20,7 @@ import {
 	Zap,
 } from "lucide-react";
 import type React from "react";
+import { useState } from "react";
 import "./App.css";
 import { useLanguage } from "./contexts/LanguageContext";
 import { useTheme } from "./contexts/ThemeContext";
@@ -26,6 +28,7 @@ import { useTheme } from "./contexts/ThemeContext";
 const App = () => {
 	const { t, language, toggleLanguage } = useLanguage();
 	const { theme, toggleTheme } = useTheme();
+	const [showFramework, setShowFramework] = useState(false);
 
 	const nodes = {
 		vias: {
@@ -166,6 +169,70 @@ const App = () => {
 						</button>
 					</div>
 				</header>
+
+				{/* Framework Explanation Section */}
+				<div className="mb-8">
+					<button
+						type="button"
+						onClick={() => setShowFramework(!showFramework)}
+						className="w-full flex items-center justify-between p-4 bg-secondary border border-default rounded-xl hover:bg-tertiary transition-all"
+					>
+						<div className="flex items-center gap-3">
+							<Info className="text-blue-600" size={20} />
+							<span className="text-sm font-bold text-primary">{t.framework.title}</span>
+						</div>
+						<ChevronDown
+							size={20}
+							className={`text-secondary transition-transform ${showFramework ? 'rotate-180' : ''}`}
+						/>
+					</button>
+
+					{showFramework && (
+						<div className="mt-4 p-6 bg-secondary border border-default rounded-xl space-y-6">
+							<p className="text-sm text-primary leading-relaxed">{t.framework.intro}</p>
+
+							<div className="space-y-3">
+								<h3 className="text-base font-bold text-red-600 flex items-center gap-2">
+									<Network size={18} />
+									{t.framework.viasTitle}
+								</h3>
+								<p className="text-sm text-primary italic">{t.framework.viasDesc}</p>
+								<ul className="space-y-2 ml-4">
+									<li className="text-sm text-secondary flex gap-2"><span className="text-red-600">•</span><span>{t.framework.viasPoint1}</span></li>
+									<li className="text-sm text-secondary flex gap-2"><span className="text-red-600">•</span><span>{t.framework.viasPoint2}</span></li>
+									<li className="text-sm text-secondary flex gap-2"><span className="text-red-600">•</span><span className="font-semibold italic">{t.framework.viasPoint3}</span></li>
+								</ul>
+							</div>
+
+							<div className="space-y-3">
+								<h3 className="text-base font-bold text-green-600 flex items-center gap-2">
+									<TrendingUp size={18} />
+									{t.framework.valorTitle}
+								</h3>
+								<p className="text-sm text-primary italic">{t.framework.valorDesc}</p>
+								<ul className="space-y-2 ml-4">
+									<li className="text-sm text-secondary flex gap-2"><span className="text-green-600">•</span><span>{t.framework.valorPoint1}</span></li>
+									<li className="text-sm text-secondary flex gap-2"><span className="text-green-600">•</span><span>{t.framework.valorPoint2}</span></li>
+									<li className="text-sm text-secondary flex gap-2"><span className="text-green-600">•</span><span className="font-semibold italic">{t.framework.valorPoint3}</span></li>
+								</ul>
+							</div>
+
+							<div className="space-y-3">
+								<h3 className="text-base font-bold text-blue-600 flex items-center gap-2">
+									<Zap size={18} />
+									{t.framework.ventajaTitle}
+								</h3>
+								<p className="text-sm text-primary italic">{t.framework.ventajaDesc}</p>
+								<ul className="space-y-2 ml-4">
+									<li className="text-sm text-secondary flex gap-2"><span className="text-blue-600">•</span><span>{t.framework.ventajaPoint1}</span></li>
+									<li className="text-sm text-secondary flex gap-2"><span className="text-blue-600">•</span><span>{t.framework.ventajaPoint2}</span></li>
+									<li className="text-sm text-secondary flex gap-2"><span className="text-blue-600">•</span><span className="font-semibold italic">{t.framework.ventajaPoint3}</span></li>
+								</ul>
+							</div>
+						</div>
+					)}
+				</div>
+
 
 				{/* Instructions / How to Use */}
 				<div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-12">
