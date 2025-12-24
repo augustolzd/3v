@@ -16,11 +16,10 @@ import {
 	Zap,
 } from "lucide-react";
 import type React from "react";
-import { useState } from "react";
 import "./App.css";
 
 const App = () => {
-	const [nodes, setNodes] = useState({
+	const nodes = {
 		vias: {
 			core: "Conectividad Global",
 			resources: "Proveedores, Nube, APIs",
@@ -39,14 +38,6 @@ const App = () => {
 			kpis: "CSAT, Retención",
 			risks: "Adopción",
 		},
-	});
-
-	const updateNode = (
-		key: "vias" | "valor" | "ventaja",
-		field: string,
-		value: string,
-	) => {
-		setNodes((prev) => ({ ...prev, [key]: { ...prev[key], [field]: value } }));
 	};
 
 	const PyramidStep = ({
@@ -83,30 +74,23 @@ const App = () => {
 		icon: Icon,
 		title,
 		value,
-		onChange,
-		placeholder,
 		color,
 	}: {
 		icon: React.ElementType;
 		title: string;
 		value: string;
-		onChange: (value: string) => void;
-		placeholder?: string;
 		color: { text: string };
 	}) => (
-		<div className="flex-1 min-w-[200px] p-4 bg-white border border-slate-100 rounded-xl shadow-sm hover:border-slate-300 transition-all">
+		<div className="flex-1 min-w-[200px] p-4 bg-white border border-slate-100 rounded-xl shadow-sm">
 			<div className="flex items-center gap-2 mb-3">
 				<Icon size={14} className={color.text} />
 				<span className="text-[10px] font-bold text-slate-400 uppercase tracking-widest">
 					{title}
 				</span>
 			</div>
-			<textarea
-				className="w-full text-sm font-medium text-slate-700 bg-transparent resize-none focus:outline-none min-h-[60px]"
-				value={value}
-				onChange={(e) => onChange(e.target.value)}
-				placeholder={placeholder}
-			/>
+			<div className="w-full text-sm font-medium text-slate-700 min-h-[60px] leading-relaxed">
+				{value}
+			</div>
 		</div>
 	);
 
@@ -240,21 +224,18 @@ const App = () => {
 								<CanvasBlock
 									title="Recursos Técnicos"
 									value={nodes.vias.resources}
-									onChange={(v) => updateNode("vias", "resources", v)}
 									icon={Database}
 									color={{ text: "text-red-400" }}
 								/>
 								<CanvasBlock
 									title="KPIs Operativos"
 									value={nodes.vias.kpis}
-									onChange={(v) => updateNode("vias", "kpis", v)}
 									icon={Target}
 									color={{ text: "text-red-400" }}
 								/>
 								<CanvasBlock
 									title="Barreras"
 									value={nodes.vias.risks}
-									onChange={(v) => updateNode("vias", "risks", v)}
 									icon={AlertCircle}
 									color={{ text: "text-red-400" }}
 								/>
@@ -273,21 +254,18 @@ const App = () => {
 								<CanvasBlock
 									title="Modelos de Valor"
 									value={nodes.valor.resources}
-									onChange={(v) => updateNode("valor", "resources", v)}
 									icon={Users}
 									color={{ text: "text-green-400" }}
 								/>
 								<CanvasBlock
 									title="Métricas Económicas"
 									value={nodes.valor.kpis}
-									onChange={(v) => updateNode("valor", "kpis", v)}
 									icon={Target}
 									color={{ text: "text-green-400" }}
 								/>
 								<CanvasBlock
 									title="Mitigación"
 									value={nodes.valor.risks}
-									onChange={(v) => updateNode("valor", "risks", v)}
 									icon={CheckCircle2}
 									color={{ text: "text-green-400" }}
 								/>
@@ -306,21 +284,18 @@ const App = () => {
 								<CanvasBlock
 									title="Integraciones Inteligentes"
 									value={nodes.ventaja.resources}
-									onChange={(v) => updateNode("ventaja", "resources", v)}
 									icon={Zap}
 									color={{ text: "text-blue-400" }}
 								/>
 								<CanvasBlock
 									title="Impacto en Usuario"
 									value={nodes.ventaja.kpis}
-									onChange={(v) => updateNode("ventaja", "kpis", v)}
 									icon={Target}
 									color={{ text: "text-blue-400" }}
 								/>
 								<CanvasBlock
 									title="Escalabilidad"
 									value={nodes.ventaja.risks}
-									onChange={(v) => updateNode("ventaja", "risks", v)}
 									icon={ArrowRight}
 									color={{ text: "text-blue-400" }}
 								/>

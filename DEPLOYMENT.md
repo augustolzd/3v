@@ -1,342 +1,169 @@
-# Deployment Guide - 3V Strategy Canvas
+# 🚀 Guía de Deployment a GitHub Pages
 
-## 📋 Pre-Deployment Checklist
+Esta guía te llevará paso a paso para publicar tu **Lienzo Estratégico 3V** en GitHub Pages.
 
-- [ ] Todas las dependencias instaladas (`npm install`)
-- [ ] Build de producción exitoso (`npm run build`)
-- [ ] Tests pasando (si aplica)
-- [ ] Variables de entorno configuradas
-- [ ] SEO meta tags verificados
-- [ ] Favicon y OG images en `/public`
-- [ ] Sitemap.xml actualizado
+## ✅ Checklist Pre-Deployment
 
-## 🚀 Opciones de Deployment
+- [x] Proyecto inicializado con Git
+- [x] Dependencias instaladas (`gh-pages`)
+- [x] Scripts de deploy configurados en `package.json`
+- [x] Base URL configurada en `vite.config.ts`
+- [x] Primer commit realizado
 
-### 1. Vercel (Recomendado)
+## 📝 Pasos para Publicar
 
-**Ventajas**: Deploy automático, CDN global, SSL gratis, preview deployments
+### 1️⃣ Crear Repositorio en GitHub
 
-#### Método A: Vercel CLI
+1. Ve a [github.com](https://github.com) e inicia sesión
+2. Haz clic en el botón **"New"** o **"+"** → **"New repository"**
+3. Configura el repositorio:
+   - **Repository name**: `3v`
+   - **Description**: `Lienzo Estratégico 3V - Marco de alineación universal para infraestructuras digitales escalables`
+   - **Visibility**: Public ✅
+   - **NO** marques "Initialize this repository with a README" (ya tenemos uno)
+4. Haz clic en **"Create repository"**
 
-```bash
-# Instalar Vercel CLI
-npm i -g vercel
+### 2️⃣ Conectar tu Repositorio Local con GitHub
 
-# Login
-vercel login
-
-# Deploy
-vercel
-
-# Deploy a producción
-vercel --prod
-```
-
-#### Método B: GitHub Integration
-
-1. Push tu código a GitHub
-2. Visita [vercel.com](https://vercel.com)
-3. Click "Import Project"
-4. Selecciona tu repositorio
-5. Configuración automática detectada ✅
-6. Click "Deploy"
-
-**Configuración Vercel** (`vercel.json`):
-
-```json
-{
-  "buildCommand": "npm run build",
-  "outputDirectory": "dist",
-  "framework": "vite"
-}
-```
-
----
-
-### 2. Netlify
-
-**Ventajas**: Formularios gratis, funciones serverless, split testing
-
-#### Deploy Manual
+Copia y ejecuta estos comandos en tu terminal (reemplaza `augustolzd` con tu usuario de GitHub si es diferente):
 
 ```bash
-# Instalar Netlify CLI
-npm i -g netlify-cli
+# Agregar el remote de GitHub
+git remote add origin https://github.com/augustolzd/3v.git
 
-# Login
-netlify login
-
-# Deploy
-netlify deploy
-
-# Deploy a producción
-netlify deploy --prod
+# Verificar que se agregó correctamente
+git remote -v
 ```
 
-#### Deploy con Git
-
-1. Push a GitHub/GitLab/Bitbucket
-2. Visita [netlify.com](https://netlify.com)
-3. Click "New site from Git"
-4. Conecta tu repositorio
-5. Configuración:
-   - **Build command**: `npm run build`
-   - **Publish directory**: `dist`
-6. Click "Deploy site"
-
-**Configuración Netlify** (`netlify.toml`):
-
-```toml
-[build]
-  command = "npm run build"
-  publish = "dist"
-
-[[redirects]]
-  from = "/*"
-  to = "/index.html"
-  status = 200
-```
-
----
-
-### 3. GitHub Pages
-
-**Ventajas**: Gratis para repositorios públicos, integración con GitHub
-
-#### Configuración
-
-1. Instalar gh-pages:
+### 3️⃣ Subir el Código a GitHub
 
 ```bash
-npm install -D gh-pages
+# Push del código a la rama main
+git push -u origin main
 ```
 
-2. Agregar scripts a `package.json`:
+Si es la primera vez que usas Git, puede que te pida autenticación:
+- **Opción 1**: Usar GitHub CLI (`gh auth login`)
+- **Opción 2**: Usar Personal Access Token
+- **Opción 3**: Usar SSH keys
 
-```json
-{
-  "scripts": {
-    "predeploy": "npm run build",
-    "deploy": "gh-pages -d dist"
-  }
-}
-```
-
-3. Configurar base en `vite.config.ts`:
-
-```typescript
-export default defineConfig({
-  base: '/3v/', // nombre de tu repositorio
-  plugins: [react()],
-})
-```
-
-4. Deploy:
+### 4️⃣ Hacer el Deploy a GitHub Pages
 
 ```bash
+# Este comando hace el build y publica automáticamente
 npm run deploy
 ```
 
-5. Habilitar GitHub Pages en Settings → Pages → Source: gh-pages branch
+Este comando:
+1. ✅ Ejecuta `npm run build` (compila el proyecto)
+2. ✅ Crea/actualiza la rama `gh-pages`
+3. ✅ Sube el contenido de `/dist` a esa rama
+4. ✅ GitHub Pages detecta automáticamente el cambio
 
----
+### 5️⃣ Configurar GitHub Pages (Solo Primera Vez)
 
-### 4. Firebase Hosting
+1. Ve a tu repositorio en GitHub: `https://github.com/augustolzd/3v`
+2. Haz clic en **Settings** (⚙️)
+3. En el menú lateral, haz clic en **Pages**
+4. En **Source**, selecciona:
+   - **Branch**: `gh-pages`
+   - **Folder**: `/ (root)`
+5. Haz clic en **Save**
 
-**Ventajas**: CDN global de Google, SSL automático, integración con Firebase
+### 6️⃣ Esperar el Deployment
+
+GitHub Pages tardará 1-2 minutos en procesar y publicar tu sitio.
+
+Verás un mensaje como:
+```
+✅ Your site is live at https://augustolzd.github.io/3v/
+```
+
+## 🔄 Actualizaciones Futuras
+
+Cada vez que quieras actualizar el sitio:
 
 ```bash
-# Instalar Firebase CLI
-npm install -g firebase-tools
+# 1. Hacer cambios en tu código
+# 2. Commit de los cambios
+git add .
+git commit -m "Descripción de los cambios"
 
-# Login
-firebase login
+# 3. Push a GitHub
+git push origin main
 
-# Inicializar
-firebase init hosting
+# 4. Deploy a GitHub Pages
+npm run deploy
+```
 
-# Configuración:
-# - Public directory: dist
-# - Single-page app: Yes
-# - GitHub integration: Optional
+## 🌐 URLs del Proyecto
 
-# Build
+- **Repositorio**: `https://github.com/augustolzd/3v`
+- **Sitio Web**: `https://augustolzd.github.io/3v/`
+- **Rama de código**: `main`
+- **Rama de deployment**: `gh-pages`
+
+## 🛠️ Comandos Útiles
+
+```bash
+# Ver estado de Git
+git status
+
+# Ver historial de commits
+git log --oneline
+
+# Ver ramas
+git branch -a
+
+# Build local para probar
 npm run build
+npm run preview
 
-# Deploy
-firebase deploy --only hosting
+# Linting
+npm run lint
 ```
 
----
+## ⚠️ Troubleshooting
 
-### 5. AWS S3 + CloudFront
+### Problema: "404 - Page not found"
+**Solución**: Verifica que la configuración de GitHub Pages esté en la rama `gh-pages` y carpeta `/ (root)`
 
-**Ventajas**: Escalabilidad infinita, control total, integración AWS
+### Problema: "Assets no cargan (CSS, JS)"
+**Solución**: Verifica que `vite.config.ts` tenga `base: '/3v/'` correctamente configurado
 
-#### Pasos:
-
-1. **Crear bucket S3**:
-   - Nombre único
-   - Región cercana a usuarios
-   - Habilitar "Static website hosting"
-
-2. **Build y upload**:
-
+### Problema: "Permission denied" al hacer push
+**Solución**: Configura tus credenciales de GitHub:
 ```bash
-npm run build
-aws s3 sync dist/ s3://your-bucket-name --delete
+git config --global user.name "Tu Nombre"
+git config --global user.email "tu@email.com"
 ```
 
-3. **Configurar CloudFront**:
-   - Origin: Tu bucket S3
-   - SSL certificate: AWS Certificate Manager
-   - Custom error pages: 404 → /index.html
+### Problema: El sitio no se actualiza
+**Solución**: 
+1. Limpia el caché del navegador (Ctrl+Shift+R)
+2. Espera 2-3 minutos para que GitHub Pages procese
+3. Verifica que el deploy se completó: `git log origin/gh-pages`
 
-4. **Automatizar con GitHub Actions**:
+## 📊 Verificación del Deploy
 
-```yaml
-name: Deploy to S3
-on:
-  push:
-    branches: [main]
-jobs:
-  deploy:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v2
-      - name: Install dependencies
-        run: npm ci
-      - name: Build
-        run: npm run build
-      - name: Deploy to S3
-        uses: jakejarvis/s3-sync-action@master
-        with:
-          args: --delete
-        env:
-          AWS_S3_BUCKET: ${{ secrets.AWS_S3_BUCKET }}
-          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
-          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-```
+Después del deploy, verifica:
+
+1. ✅ El sitio carga en `https://augustolzd.github.io/3v/`
+2. ✅ Todos los estilos se aplican correctamente
+3. ✅ Los iconos de Lucide React se muestran
+4. ✅ La fuente Plus Jakarta Sans carga
+5. ✅ El botón de LinkedIn funciona
+6. ✅ La función de impresión funciona
+7. ✅ El diseño es responsivo en móvil
+
+## 🎉 ¡Listo!
+
+Tu **Lienzo Estratégico 3V** ahora está publicado y accesible para todo el mundo.
+
+Comparte el link: **https://augustolzd.github.io/3v/**
 
 ---
 
-## 🔧 Configuración de Dominio Personalizado
-
-### Vercel
-
-```bash
-vercel domains add 3v-strategy.japifon.com
-```
-
-Luego configura DNS:
-```
-CNAME: 3v-strategy → cname.vercel-dns.com
-```
-
-### Netlify
-
-1. Site settings → Domain management
-2. Add custom domain
-3. Configurar DNS:
-```
-CNAME: 3v-strategy → your-site.netlify.app
-```
-
----
-
-## 🌍 Variables de Entorno
-
-### Desarrollo (`.env.local`)
-
-```env
-VITE_APP_TITLE=3V Strategy Canvas
-VITE_API_URL=http://localhost:3000
-```
-
-### Producción
-
-**Vercel**: Settings → Environment Variables  
-**Netlify**: Site settings → Build & deploy → Environment  
-**GitHub Actions**: Repository → Settings → Secrets
-
----
-
-## 📊 Monitoreo Post-Deployment
-
-### Google Analytics
-
-Agregar a `index.html`:
-
-```html
-<!-- Google Analytics -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-  gtag('config', 'G-XXXXXXXXXX');
-</script>
-```
-
-### Sentry (Error Tracking)
-
-```bash
-npm install @sentry/react
-```
-
-```typescript
-import * as Sentry from "@sentry/react";
-
-Sentry.init({
-  dsn: "YOUR_SENTRY_DSN",
-  environment: import.meta.env.MODE,
-});
-```
-
----
-
-## ✅ Verificación Post-Deploy
-
-- [ ] Sitio accesible en URL de producción
-- [ ] Favicon visible en pestaña del navegador
-- [ ] Meta tags correctos (inspeccionar con View Source)
-- [ ] OG image preview en redes sociales ([opengraph.xyz](https://www.opengraph.xyz/))
-- [ ] Lighthouse score > 90 en todas las categorías
-- [ ] Funcionalidad de impresión/export
-- [ ] Responsive en móvil, tablet, desktop
-- [ ] SSL/HTTPS activo (candado verde)
-
----
-
-## 🐛 Troubleshooting
-
-### Error: "Failed to load module"
-
-**Solución**: Verificar que `base` en `vite.config.ts` coincida con la ruta de deployment
-
-### Imágenes no cargan
-
-**Solución**: Usar rutas absolutas desde `/public` (ej: `/favicon.png` no `./favicon.png`)
-
-### Tailwind no funciona en producción
-
-**Solución**: Verificar que `tailwind.config.js` tenga los paths correctos en `content`
-
-### 404 en rutas (si usas React Router)
-
-**Solución**: Configurar redirects/rewrites en tu hosting:
-- Vercel: `vercel.json` con rewrites
-- Netlify: `_redirects` file o `netlify.toml`
-
----
-
-## 📞 Soporte
-
-Para asistencia con deployment, contactar a:
-- **CTO Office**: cto@japifon.com
-- **DevOps Team**: devops@japifon.com
-
----
-
-**Última actualización**: Diciembre 2025  
-**Versión**: 1.0.0
+**Nota**: Si cambias el nombre del repositorio en el futuro, recuerda actualizar:
+- `vite.config.ts` → `base: '/nuevo-nombre/'`
+- `package.json` → `homepage: "https://augustolzd.github.io/nuevo-nombre"`
