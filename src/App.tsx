@@ -240,10 +240,10 @@ const App = () => {
 						<Info className="text-blue-500 shrink-0 mt-1" size={16} />
 						<div>
 							<p className="text-[11px] font-bold text-blue-800 uppercase mb-1">
-								1. Definir la Base (Vías)
+								{t.instructions.step1Title}
 							</p>
 							<p className="text-[10px] text-blue-600 leading-tight">
-								Infraestructura y canales que permiten que la operación exista.
+								{t.instructions.step1Desc}
 							</p>
 						</div>
 					</div>
@@ -251,10 +251,10 @@ const App = () => {
 						<TrendingUp className="text-green-500 shrink-0 mt-1" size={16} />
 						<div>
 							<p className="text-[11px] font-bold text-green-800 uppercase mb-1">
-								2. Orquestar el Valor
+								{t.instructions.step2Title}
 							</p>
 							<p className="text-[10px] text-green-600 leading-tight">
-								Lógica de monetización y rentabilidad del flujo de datos.
+								{t.instructions.step2Desc}
 							</p>
 						</div>
 					</div>
@@ -262,10 +262,10 @@ const App = () => {
 						<Zap className="text-red-500 shrink-0 mt-1" size={16} />
 						<div>
 							<p className="text-[11px] font-bold text-red-800 uppercase mb-1">
-								3. Escalar la Ventaja
+								{t.instructions.step3Title}
 							</p>
 							<p className="text-[10px] text-red-600 leading-tight">
-								Propuesta de valor final e integraciones inteligentes con IA.
+								{t.instructions.step3Desc}
 							</p>
 						</div>
 					</div>
