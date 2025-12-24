@@ -118,7 +118,7 @@ const App = () => {
 							</span>
 						</div>
 						<h1 className="text-4xl font-black tracking-tighter text-primary leading-none uppercase">
-							Lienzo Estratégico <span className="text-blue-600">3V</span>
+							{t.header.title} <span className="text-blue-600">{t.header.titleHighlight}</span>
 						</h1>
 						<p className="text-secondary font-medium text-base">
 							Marco de alineación universal para infraestructuras digitales
@@ -308,7 +308,7 @@ const App = () => {
 							<div className="flex items-center gap-2 border-b-2 border-red-500 pb-2 w-fit">
 								<Network size={16} className="text-red-500" />
 								<h4 className="text-sm font-black uppercase tracking-widest text-red-500">
-									INFRAESTRUCTURA (VÍAS)
+									{t.sections.viasTitle}
 								</h4>
 							</div>
 							<div className="flex flex-wrap gap-4">
@@ -338,7 +338,7 @@ const App = () => {
 							<div className="flex items-center gap-2 border-b-2 border-green-500 pb-2 w-fit">
 								<TrendingUp size={16} className="text-green-500" />
 								<h4 className="text-sm font-black uppercase tracking-widest text-green-500">
-									NEGOCIO (VALOR)
+									{t.sections.valorTitle}
 								</h4>
 							</div>
 							<div className="flex flex-wrap gap-4">
@@ -368,7 +368,7 @@ const App = () => {
 							<div className="flex items-center gap-2 border-b-2 border-blue-500 pb-2 w-fit">
 								<Zap size={16} className="text-blue-500" />
 								<h4 className="text-sm font-black uppercase tracking-widest text-blue-500">
-									INNOVACIÓN (VENTAJA)
+									{t.sections.ventajaTitle}
 								</h4>
 							</div>
 							<div className="flex flex-wrap gap-4">
